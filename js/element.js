@@ -2,35 +2,39 @@ Newton.Element = function(type, attrs){
   this.type = type;
   this.attrs = attrs;
 
-  this.el = document.createElement(this.type);
-  this._assignAttributes(this.attrs);
+  this.children = []
 }
 
 Newton.Element.prototype = {
 
   render: function(){
-    return this.el.cloneNode(true);
+    var el = document.createElement(this.type);
+    this._assignAttributes(el, this.attrs);
+
+    for (var i=0; i < this.children.length; i++){
+      if (this.children[i] instanceof Newton.Element){
+        el.appendChild((this.children[i]).render());
+      }
+      else {
+        var child = document.createTextNode(this.children[i]);
+        el.appendChild(child);
+      }
+    }
+
+    return el;
   },
 
   setChildren: function(children){
-    for (var i=0; i < children.length; i++){
-      if (children[i] instanceof Newton.Element){
-        this.el.appendChild((children[i]).render());
-      }
-      else {
-        var child = document.createTextNode(children[i]);
-        this.el.appendChild(child);
-      }
-    }
+    this.children = children;
 
     return;
   },
 
 
 
-  _assignAttributes: function(attrs){
+  _assignAttributes: function(el, attrs){
     for (var attr in attrs){
-      this.el[attr] = attrs[attr];
+      el[attr] = attrs[attr];
     }
   }
 

@@ -22,4 +22,7 @@ window.onload = function(){
   // document.body.appendChild(xx.getElement());
   // document.body.appendChild(x.getElement());
 
+  foo = $('div', {className: 'foo'});
+  bar = $('p', {className: 'beng'});
+
 }
