@@ -7,12 +7,14 @@ window.Newton = window.Newton || {};
     var constructor =
       function(props){
         this.uid = scope.global_uid++;
-        this.props = props;
+        this.props = props || {};
+        this.state = {};
       };
 
     constructor.prototype.__proto__ = scope.Component.prototype;
 
-    // Assign other original methods
+    constructor.prototype.render = function(){ return null; };
+
     for (var attr in object) {
       constructor.prototype[attr] = object[attr];
     }

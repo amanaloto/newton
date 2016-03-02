@@ -11,6 +11,16 @@
     return el;
   };
 
+  scope.Component.prototype.getInitialState = function(){
+    return {};
+  };
+
+  scope.Component.prototype.setState = function(newState){
+    this.state = newState;
+
+    return;
+  };
+
   scope.Component.prototype.getUID = function(){
     return this.uid;
   };
