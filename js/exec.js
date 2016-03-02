@@ -1,28 +1,29 @@
 window.onload = function(){
 
-  // var XComponent = Newton.createClass({
-    // render: function(){
-      // return $('div', {className: 'x-comp'}, this.props.text);
-    // }
-  // });
+  var XComponent = Newton.createClass({
+    render: function(){
+      return $('div', {className: 'x-comp'}, this.props.text);
+    }
+  });
 
-  // var YComponent = Newton.createClass({
-    // render: function(){
-      // return $('div', {className: 'y-comp'}, 'YCombinator');
-    // }
-  // });
+  var YComponent = Newton.createClass({
+    render: function(){
+      return $('div', {className: 'y-comp'}, 'YCombinator');
+    }
+  });
 
-  // var x = new XComponent({text: 'X GON GIVE IT YOU YA'}),
-      // xx = new XComponent({text: 'VIN DIESEL'}),
-      // y = new YComponent();
+  var XXXComponent = Newton.createClass({
+    render: function(){
+      var insideX = new XComponent({text: this.props.text});
+      return insideX.render();
+    }
+  });
 
-  // console.log(x.render());
+  x = new XComponent({text: 'X GON GIVE IT YOU YA'});
+  xx = new XXXComponent({text: 'VIN DIESEL'});
+  y = new YComponent();
 
-  // document.body.appendChild(x.getElement());
-  // document.body.appendChild(xx.getElement());
-  // document.body.appendChild(x.getElement());
-
-  foo = $('div', {className: 'foo'});
-  bar = $('p', {className: 'beng'});
-
-}
+  document.body.appendChild(x.render().render());
+  document.body.appendChild(xx.render().render());
+  document.body.appendChild(y.render().render());
+};

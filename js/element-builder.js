@@ -1,22 +1,22 @@
-function ElementBuilder(){}
+(function(scope){
+  scope.ElementBuilder = function(){};
 
-ElementBuilder.prototype.builder = function(){
-  return this.build.bind(this);
-};
+  scope.ElementBuilder.prototype.builder = function(){
+    return this.build.bind(this);
+  };
 
-ElementBuilder.prototype.build = function(elType, elAttrs){
-  var el = new Newton.Element(elType, elAttrs);
+  scope.ElementBuilder.prototype.build = function(elType, elAttrs){
+    var el = new scope.Element(elType, elAttrs);
 
-  if (arguments.length > 2){
-    var childElements =
-      Array.prototype.slice.call(arguments, 2);
+    if (arguments.length > 2){
+      var childElements =
+        Array.prototype.slice.call(arguments, 2);
 
-    el.setChildren(childElements);
-  }
+      el.setChildren(childElements);
+    }
 
-  return el;
-};
+    return el;
+  };
 
-document.onreadystatechange = function(){
-  window.$ = (new ElementBuilder()).builder();
-};
+  window.$ = (new scope.ElementBuilder()).builder();
+})(Newton);

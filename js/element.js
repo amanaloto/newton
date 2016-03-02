@@ -1,41 +1,54 @@
-Newton.Element = function(type, attrs){
-  this.type = type;
-  this.attrs = attrs;
+(function(scope){
+  scope.Element = function(type, attrs){
+    this.type = type;
+    this.attrs = attrs;
 
-  this.children = []
-}
+    this.children = [];
+  };
 
-Newton.Element.prototype = {
+  scope.Element.prototype = {
 
-  render: function(){
-    var el = document.createElement(this.type);
-    this._assignAttributes(el, this.attrs);
+    render: function(){
+      var el = document.createElement(this.type);
 
-    for (var i=0; i < this.children.length; i++){
-      if (this.children[i] instanceof Newton.Element){
-        el.appendChild((this.children[i]).render());
+      // Set Element Attributes
+      for (var attr in this.attrs){
+        if (typeof(el[attr]) === 'undefined'){
+          el.setAttribute(attr, this.attrs[attr]);
+        }
+        else {
+          el[attr] = this.attrs[attr];
+        }
       }
-      else {
-        var child = document.createTextNode(this.children[i]);
-        el.appendChild(child);
+
+      // Append Element Children
+      for (var i=0; i < this.children.length; i++){
+        if (this.children[i] instanceof scope.Element){
+          el.appendChild((this.children[i]).render());
+        }
+        else {
+          var child = document.createTextNode(this.children[i]);
+          el.appendChild(child);
+        }
       }
-    }
 
-    return el;
-  },
+      return el;
+    },
 
-  setChildren: function(children){
-    this.children = children;
+    setChildren: function(children){
+      this.children = children;
 
-    return;
-  },
+      return true;
+    },
 
+    assignAttributes: function(attrs){
+      this.attrs = attrs;
+      return true;
+    },
 
+    getAttributes: function(){
+      return this.attrs;
+    },
 
-  _assignAttributes: function(el, attrs){
-    for (var attr in attrs){
-      el[attr] = attrs[attr];
-    }
-  }
-
-};
+  };
+})(Newton);

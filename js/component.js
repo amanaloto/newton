@@ -1,18 +1,18 @@
-Newton.Component = function(){}
+(function(scope){
+  scope.Component = function(){};
 
-// Newton.Component.prototype.getElement = function(){
-  // var existingElement =
-    // document.querySelector('[data-newtonid="' + this.uid + '"]');
+  scope.Component.prototype.render = function(){
+    var el = this.render;
 
-  // if (existingElement !== null) return existingElement;
+    var newAttributes = el.getAttributes();
+    newAttributes['data-newtonid'] = this.uid;
+    el.assignAttributes(newAttributes);
 
-  // var element = this.render();
+    return el;
+  };
 
-  // element.setAttribute('data-newtonid', this.uid);
+  scope.Component.prototype.getUID = function(){
+    return this.uid;
+  };
 
-  // return element;
-// }
-
-// Newton.Component.prototype.getUID = function(){
-  // return this.uid;
-// }
+})(Newton);
