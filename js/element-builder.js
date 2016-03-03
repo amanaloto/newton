@@ -12,11 +12,14 @@
       el = new scope.Element(elType, elAttrs);
     }
     else {
-      el = (new elType(elAttrs)).render();
+      var component = new elType(elAttrs);
+      el = component.render();
+      el.setMainComponent(component);
     }
 
     if (children.length > 0){
       el.setChildren(children);
+      el.pushSubComponents(children);
     }
 
     return el;

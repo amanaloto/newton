@@ -4,6 +4,8 @@
     this.attrs = attrs;
 
     this.children = [];
+
+    this.allComponents = [null];
   };
 
   scope.Element.prototype = {
@@ -39,6 +41,23 @@
       this.children = children;
 
       return true;
+    },
+
+    setMainComponent: function(component){
+      this.allComponents[0] = component;
+      return true;
+    },
+
+    pushSubComponents: function(elements){
+      for (var i=0; i < elements.length; i++){
+        var subComponents = elements[i].components();
+        this.allComponents.push.apply(this.allComponents, subComponents);
+      }
+      return true;
+    },
+
+    components: function(){
+      return this.allComponents;
     },
 
     assignAttributes: function(attrs){
