@@ -5,14 +5,18 @@
     return this.build.bind(this);
   };
 
-  scope.ElementBuilder.prototype.build = function(elType, elAttrs){
-    var el = new scope.Element(elType, elAttrs);
+  scope.ElementBuilder.prototype.build = function(elType, elAttrs, ...children){
+    var el;
 
-    if (arguments.length > 2){
-      var childElements =
-        Array.prototype.slice.call(arguments, 2);
+    if (typeof(elType) === 'string') {
+      el = new scope.Element(elType, elAttrs);
+    }
+    else {
+      el = (new elType(elAttrs)).render();
+    }
 
-      el.setChildren(childElements);
+    if (children.length > 0){
+      el.setChildren(children);
     }
 
     return el;
