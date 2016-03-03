@@ -67,7 +67,7 @@
 
     getAttributes: function(){
       return this.attrs;
-    },
+    }
 
   };
 })(Newton);

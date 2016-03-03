@@ -27,4 +27,12 @@
     return this.uid;
   };
 
+  scope.Component.prototype.willRender = function(){
+    return null;
+  };
+
+  scope.Component.prototype.didRender = function(){
+    return null;
+  };
+
 })(Newton);

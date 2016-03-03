@@ -16,9 +16,8 @@ window.Newton = window.Newton || {};
     constructor.prototype.originalRender =
       (object.render || function(){ return null; });
 
-    // for (var attr in object) {
-      // constructor.prototype[attr] = object[attr];
-    // }
+    constructor.prototype.willRender = object.willRender;
+    constructor.prototype.didRender = object.didRender;
 
     return constructor;
   }
