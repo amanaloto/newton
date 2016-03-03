@@ -2,7 +2,9 @@
   scope.Component = function(){};
 
   scope.Component.prototype.render = function(){
-    var el = this.render;
+    var el = this.originalRender();
+
+    if (!el) return null;
 
     var newAttributes = el.getAttributes();
     newAttributes['data-newtonid'] = this.uid;

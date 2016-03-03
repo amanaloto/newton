@@ -13,11 +13,12 @@ window.Newton = window.Newton || {};
 
     constructor.prototype.__proto__ = scope.Component.prototype;
 
-    constructor.prototype.render = function(){ return null; };
+    constructor.prototype.originalRender =
+      (object.render || function(){ return null; });
 
-    for (var attr in object) {
-      constructor.prototype[attr] = object[attr];
-    }
+    // for (var attr in object) {
+      // constructor.prototype[attr] = object[attr];
+    // }
 
     return constructor;
   }
