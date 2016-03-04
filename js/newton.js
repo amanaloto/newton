@@ -18,6 +18,11 @@ window.Newton = window.Newton || {};
 
     constructor.prototype.willRender = object.willRender;
     constructor.prototype.didRender = object.didRender;
+    constructor.prototype.willRemove = object.willRemove;
+
+    constructor.prototype.onclick = object.onclick;
+    constructor.prototype.onmouseover = object.onmouseover;
+    constructor.prototype.onmouseout = object.onmouseout;
 
     return constructor;
   }

@@ -34,6 +34,11 @@
         }
       }
 
+      // Set Handlers
+      el.onclick = this.onclick;
+      el.onmouseover = this.onmouseover;
+      el.onmouseout = this.onmouseout;
+
       return el;
     },
 
@@ -50,8 +55,10 @@
 
     pushSubComponents: function(elements){
       for (var i=0; i < elements.length; i++){
-        var subComponents = elements[i].components();
-        this.allComponents.push.apply(this.allComponents, subComponents);
+        if (elements[i] instanceof Newton.Element){
+          var subComponents = elements[i].components();
+          this.allComponents.push.apply(this.allComponents, subComponents);
+        }
       }
       return true;
     },
@@ -60,13 +67,27 @@
       return this.allComponents;
     },
 
-    assignAttributes: function(attrs){
+    setAttributes: function(attrs){
       this.attrs = attrs;
+      return true;
+    },
+
+    pushAttributes: function(attrs){
+      for(var attr in attrs){
+        this.attrs[attr] = attrs[attr];
+      }
+
       return true;
     },
 
     getAttributes: function(){
       return this.attrs;
+    },
+
+    setEventHandlers: function(events){
+      this.onclick = events.onclick;
+      this.onmouseover = events.onmouseover;
+      this.onmouseout = events.onmouseout;
     }
 
   };

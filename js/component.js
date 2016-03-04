@@ -4,11 +4,14 @@
   scope.Component.prototype.render = function(){
     var el = this.originalRender();
 
-    if (!el) return null;
+    if (el === null) return null;
 
-    var newAttributes = el.getAttributes();
-    newAttributes['data-newtonid'] = this.uid;
-    el.assignAttributes(newAttributes);
+    el.pushAttributes({'data-newtonid': this.uid});
+    el.setEventHandlers({
+      onclick: this.onclick,
+      onmouseover: this.onmouseover,
+      onmouseout: this.onmouseout
+    });
 
     return el;
   };
