@@ -44,7 +44,6 @@
 
     setChildren: function(children){
       this.children = children;
-
       return true;
     },
 

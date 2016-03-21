@@ -8,7 +8,7 @@ window.Newton = window.Newton || {};
       function(props){
         this.uid = scope.global_uid++;
         this.props = props || {};
-        this.state = {};
+        this.state = this.getInitialState();
       };
 
     constructor.prototype.__proto__ = scope.Component.prototype;
@@ -18,12 +18,16 @@ window.Newton = window.Newton || {};
 
     constructor.prototype.willRender = object.willRender;
     constructor.prototype.didRender = object.didRender;
-    constructor.prototype.willRemove = object.willRemove;
+
+    if (object.getInitialState){
+      constructor.prototype.getInitialState = object.getInitialState;
+    }
 
     constructor.prototype.onclick = object.onclick;
     constructor.prototype.onmouseover = object.onmouseover;
     constructor.prototype.onmouseout = object.onmouseout;
 
     return constructor;
-  }
+  };
+
 })(Newton);
